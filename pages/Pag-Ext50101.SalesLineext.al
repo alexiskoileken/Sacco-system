@@ -15,8 +15,7 @@ pageextension 50101 "Sales Line ext" extends "Sales Lines"
             {
                 Caption = 'Sort Order';
                 ApplicationArea = basic, suite;
-                Promoted = true;
-                PromotedCategory = Process;
+                Image = SortDescending;
                 trigger OnAction()
                 var
                     myInt: Integer;
