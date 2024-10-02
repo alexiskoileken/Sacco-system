@@ -49,16 +49,7 @@ page 50101 "Custom workflows Header Card"
                     ToolTip = 'Request approval to change the record.';
                     Promoted = true;
                     PromotedCategory = Process;
-                    trigger OnAction()
 
-                    var
-                        CustomWorkflowMgmt: Codeunit "Custom Workflow Mgmt";
-                        RecRef: RecordRef;
-                    begin
-                        RecRef.GetTable(Rec);
-                        if CustomWorkflowMgmt.CheckApprovalsWorkflowEnabled(RecRef) then
-                            CustomWorkflowMgmt.OnSendWorkflowForApproval(RecRef);
-                    end;
                 }
                 action(CancelApprovalRequest)
                 {
@@ -69,14 +60,7 @@ page 50101 "Custom workflows Header Card"
                     ToolTip = 'Cancel the approval request.';
                     Promoted = true;
                     PromotedCategory = Process;
-                    trigger OnAction()
-                    var
-                        CustomWorkflowMgmt: Codeunit "Custom Workflow Mgmt";
-                        RecRef: RecordRef;
-                    begin
-                        RecRef.GetTable(Rec);
-                        CustomWorkflowMgmt.OnCancelWorkflowForApproval(RecRef);
-                    end;
+
                 }
             }
         }
