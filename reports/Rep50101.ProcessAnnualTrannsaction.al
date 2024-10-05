@@ -25,9 +25,14 @@ report 50101 "Process Annual Trannsaction"
                 GenJnlLn."Line No." := LineNo;
                 GenJnlLn."Journal Template Name" := UserSetup."Journal Template Name";
                 GenJnlLn."Journal Batch Name" := UserSetup."Journal Batch Name";
+                GenJnlLn."Document Date" := Today;
                 GenJnlLn."Document No." := DocumentNo;
                 GenJnlLn."Account Type" := GenJnlLn."Account Type"::Customer;
                 GenJnlLn.Validate("Account No.", customer."No.");
+                GenJnlLn.Validate(Amount, InputAmount);
+                GenJnlLn."Bal. Account Type" := GenJnlLn."Bal. Account Type"::"G/L Account";
+                GenJnlLn."Bal. Account No." := ExpenseGlAcc;
+                GenJnlLn.Insert();
 
             end;
         }
@@ -64,6 +69,15 @@ report 50101 "Process Annual Trannsaction"
                     {
                         ToolTip = 'Specifies the Document No';
                     }
+                    field(Amount; InputAmount)
+                    {
+                        ToolTip = 'Specifies the Amount';
+                    }
+                    field(DirectPosting; DirectPosting)
+                    {
+                        ToolTip = 'Specifies if posting is to be done directly';
+                    }
+
 
                 }
             }
@@ -96,6 +110,17 @@ report 50101 "Process Annual Trannsaction"
 
     end;
 
+    trigger OnPostReport()
+    var
+        myInt: Integer;
+    begin
+        GenJnlLn.Reset();
+        GenJnlLn.SetRange("Journal Template Name", UserSetup."Journal Template Name");
+        GenJnlLn.SetRange("Journal Batch Name", UserSetup."Journal Batch Name");
+        if GenJnlLn.FindFirst() then
+            Page.Run(Page::"General Journal", GenJnlLn);
+    end;
+
     var
         ExpenseGlAcc: Code[20];
         TaxGlAcc: Code[20];
@@ -106,5 +131,7 @@ report 50101 "Process Annual Trannsaction"
         GenJnlLn: Record "Gen. Journal Line";
         LineNo: Integer;
         DocumentNo: Code[20];
+        InputAmount: Decimal;
+        DirectPosting: Boolean;
 
 }

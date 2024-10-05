@@ -13,6 +13,7 @@ pageextension 50103 "Customer List ext" extends "Customer List"
                 Promoted = true;
                 PromotedCategory = Process;
                 RunObject = report "Process Annual Trannsaction";
+                Image = Transactions;
             }
         }
     }
