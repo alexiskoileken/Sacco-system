@@ -27,6 +27,7 @@ report 50101 "Process Annual Trannsaction"
                 GenJnlLn."Journal Batch Name" := UserSetup."Journal Batch Name";
                 GenJnlLn."Document Date" := Today;
                 GenJnlLn."Document No." := DocumentNo;
+                GenJnlLn."Posting Date" := Today;
                 GenJnlLn."Account Type" := GenJnlLn."Account Type"::Customer;
                 GenJnlLn.Validate("Account No.", customer."No.");
                 GenJnlLn.Validate(Amount, InputAmount);
@@ -117,8 +118,13 @@ report 50101 "Process Annual Trannsaction"
         GenJnlLn.Reset();
         GenJnlLn.SetRange("Journal Template Name", UserSetup."Journal Template Name");
         GenJnlLn.SetRange("Journal Batch Name", UserSetup."Journal Batch Name");
-        if GenJnlLn.FindFirst() then
-            Page.Run(Page::"General Journal", GenJnlLn);
+        if GenJnlLn.FindFirst() then begin
+            if not DirectPosting then
+                Page.Run(Page::"General Journal", GenJnlLn)
+            else
+                Codeunit.Run(Codeunit::"Gen. Jnl.-Post Batch", GenJnlLn)
+        end;
+
     end;
 
     var

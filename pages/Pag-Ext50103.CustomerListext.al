@@ -12,8 +12,16 @@ pageextension 50103 "Customer List ext" extends "Customer List"
                 Caption = 'Annual Transaction';
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = report "Process Annual Trannsaction";
                 Image = Transactions;
+                trigger OnAction()
+                var
+                    Cust: Record Customer;
+                begin
+                    Cust.Reset();
+                    Cust.SetRange("No.", Rec."No.");
+                    if Cust.FindFirst() then
+                        Report.Run(Report::"Process Annual Trannsaction", true, false, Cust);
+                end;
             }
         }
     }
