@@ -24,6 +24,11 @@ report 50101 "Process Annual Trannsaction"
                 GenJnlLn.Init();
                 GenJnlLn."Line No." := LineNo;
                 GenJnlLn."Journal Template Name" := UserSetup."Journal Template Name";
+                GenJnlLn."Journal Batch Name" := UserSetup."Journal Batch Name";
+                GenJnlLn."Document No." := DocumentNo;
+                GenJnlLn."Account Type" := GenJnlLn."Account Type"::Customer;
+                GenJnlLn.Validate("Account No.", customer."No.");
+
             end;
         }
     }
@@ -54,6 +59,10 @@ report 50101 "Process Annual Trannsaction"
                     {
                         ToolTip = 'Specifies the payment G/L Account';
                         TableRelation = "G/L Account" where("Direct Posting" = const(true));
+                    }
+                    field(DocumentNo; DocumentNo)
+                    {
+                        ToolTip = 'Specifies the Document No';
                     }
 
                 }
@@ -96,5 +105,6 @@ report 50101 "Process Annual Trannsaction"
         UserSetup: Record "User Setup";
         GenJnlLn: Record "Gen. Journal Line";
         LineNo: Integer;
+        DocumentNo: Code[20];
 
 }
