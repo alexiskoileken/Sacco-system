@@ -16,6 +16,15 @@ report 50101 "Process Annual Trannsaction"
             column(No; "No.")
             {
             }
+            trigger OnAfterGetRecord()
+            var
+                myInt: Integer;
+            begin
+                LineNo += 1;
+                GenJnlLn.Init();
+                GenJnlLn."Line No." := LineNo;
+                GenJnlLn."Journal Template Name" := UserSetup."Journal Template Name";
+            end;
         }
     }
     requestpage
@@ -66,6 +75,16 @@ report 50101 "Process Annual Trannsaction"
         if FeesIncomeGlAcc = '' then Error(StrSubstNo(EmptyErrorMsg), 'Fees income G/L Account');
         if PaymentGlAcc = '' then Error(StrSubstNo(EmptyErrorMsg), 'Payment G/L Account');
 
+        UserSetup.Get(UserId);
+        UserSetup.TestField("Journal Template Name");
+        UserSetup.TestField("Journal Batch Name");
+
+        GenJnlLn.Reset();
+        GenJnlLn.SetRange("Journal Template Name", UserSetup."Journal Template Name");
+        GenJnlLn.SetRange("Journal Batch Name", UserSetup."Journal Batch Name");
+        if GenJnlLn.FindFirst() then
+            GenJnlLn.DeleteAll();
+
     end;
 
     var
@@ -74,5 +93,8 @@ report 50101 "Process Annual Trannsaction"
         FeesIncomeGlAcc: Code[20];
         PaymentGlAcc: Code[20];
         EmptyErrorMsg: Label 'Please enter the %1 field';
+        UserSetup: Record "User Setup";
+        GenJnlLn: Record "Gen. Journal Line";
+        LineNo: Integer;
 
 }
