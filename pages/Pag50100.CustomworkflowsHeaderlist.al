@@ -29,6 +29,8 @@ page 50100 "Custom workflows Header list"
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
             }
+
         }
+
     }
 }

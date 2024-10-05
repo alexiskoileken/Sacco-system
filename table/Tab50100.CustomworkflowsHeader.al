@@ -47,4 +47,5 @@ table 50100 "Custom workflows Header"
     var
         PurchPayablesSetup: Record "Purchases & Payables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
+        WorkflowEventHandling: Codeunit "Workflow Event Handling";
 }
