@@ -5,7 +5,18 @@ pageextension 50100 "Accountant RC" extends "Accountant Role Center"
 {
     layout
     {
+        modify(ApprovalsActivities)
+        {
+            Visible = false;
 
+        }
+        addafter(ApprovalsActivities)
+        {
+            part(Custom; "Custom Cue ")
+            {
+                ApplicationArea = basic, suite;
+            }
+        }
     }
     actions
     {
