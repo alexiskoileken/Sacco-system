@@ -25,13 +25,5 @@ pageextension 50103 "Customer List ext" extends "Customer List"
             }
         }
     }
-    trigger OnOpenPage()
-    var
 
-    begin
-        Rec.Reset();
-        Rec.SetRange("Location Code", 'Yellow');
-        if Rec.FindSet() then
-            Page.Run(Page::"Customer List", Rec);
-    end;
 }
