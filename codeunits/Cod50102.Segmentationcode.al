@@ -28,13 +28,15 @@ codeunit 50102 "Segmentation code"
 
 
             if Customer.Get(CustomerNo) then begin
+                Customer.Init();
                 if TotalSales > 50000 then
                     Customer.Segment := Customer.Segment::High
                 else if TotalSales > 10000 then
                     Customer.Segment := Customer.Segment::Medium
                 else
                     Customer.Segment := Customer.Segment::Low;
-                Customer.Modify(true)
+                Customer.Modify(true);
+                Customer.Insert(true);
             end;
         end;
 

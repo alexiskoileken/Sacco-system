@@ -14,26 +14,13 @@ pageextension 50104 "Customer Card Ext " extends "Customer Card"
             }
         }
     }
-    actions
-    {
-        addlast(processing)
-        {
-            action(Segmentation)
-            {
-                Caption = 'Segmentation';
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Image = Calculate;
-                trigger OnAction()
-                var
-                    Segmentationcode: Codeunit "Segmentation code";
-                begin
-                    Segmentationcode.UpdateCustomerSegment(Rec."No.");
-                end;
-            }
-        }
-    }
+    trigger OnOpenPage()
+    var
+        Segmentationcode: Codeunit "Segmentation code";
+        customer: Record Customer;
+    begin
+        Segmentationcode.UpdateCustomerSegment(customer."No.");
+    end;
 
 
 }

@@ -24,6 +24,13 @@ pageextension 50103 "Customer List ext" extends "Customer List"
                 end;
             }
         }
+        addafter("Annual transaction")
+        {
+            action(High)
+            {
+                Caption = 'High';
+            }
+        }
     }
 
 }
