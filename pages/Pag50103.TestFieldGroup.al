@@ -1,3 +1,6 @@
+/// <summary>
+/// Page Test Field Group (ID 50103).
+/// </summary>
 page 50103 "Test Field Group"
 {
     ApplicationArea = All;
@@ -5,7 +8,7 @@ page 50103 "Test Field Group"
     PageType = List;
     SourceTable = "Test Field Groups";
     UsageCategory = Lists;
-    
+
     layout
     {
         area(Content)
@@ -30,5 +33,7 @@ page 50103 "Test Field Group"
                 }
             }
         }
+
     }
+
 }

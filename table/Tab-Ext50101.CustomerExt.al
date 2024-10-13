@@ -12,4 +12,8 @@ tableextension 50101 "Customer Ext" extends Customer
             Editable = false;
         }
     }
+    fieldgroups
+    {
+        addlast(DropDown; Segment) { }
+    }
 }

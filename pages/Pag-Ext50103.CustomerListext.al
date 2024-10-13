@@ -3,6 +3,18 @@
 /// </summary>
 pageextension 50103 "Customer List ext" extends "Customer List"
 {
+    layout
+    {
+        addlast(Control1)
+        {
+            field(Segment; Rec.Segment)
+            {
+                ApplicationArea = all;
+                Visible = true;
+            }
+        }
+
+    }
     actions
     {
         addafter(ApplyTemplate)

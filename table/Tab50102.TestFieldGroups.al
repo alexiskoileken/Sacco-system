@@ -38,5 +38,6 @@ table 50102 "Test Field Groups"
     fieldgroups
     {
         fieldgroup(Brick; No, name, SurName) { }
+        fieldgroup(DropDown; No, name, SurName) { }
     }
 }
