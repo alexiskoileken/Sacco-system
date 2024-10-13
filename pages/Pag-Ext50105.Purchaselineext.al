@@ -19,7 +19,7 @@ pageextension 50105 "Purchase line ext" extends "Purchase Lines"
                     startDate: Date;
                     EndDate: Date;
                 begin
-                    startDate := WorkDate();
+                    startDate := CalcDate('<-30D>', WorkDate());
                     EndDate := WorkDate();
                     Rec.Reset();
                     Rec.SetRange("Order Date", startDate, EndDate);
