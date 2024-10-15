@@ -41,4 +41,27 @@ codeunit 50102 "Segmentation code"
         end;
 
     end;
+
+    /// <summary>
+    /// changeColor.
+    /// </summary>
+    /// <param name="CustomworkflowsHdr">Record "Custom workflows Header".</param>
+    /// <returns>Return value of type Text.</returns>
+    procedure changeColor(CustomworkflowsHdr: Record "Custom workflows Header"): Text
+    var
+        myInt: Integer;
+    begin
+        case CustomworkflowsHdr.Status of
+
+            CustomworkflowsHdr.Status::Open:
+                exit('favorable');
+            CustomworkflowsHdr.Status::Approved:
+                exit('Strong');
+            CustomworkflowsHdr.Status::Pending:
+                exit('Subordinate');
+            CustomworkflowsHdr.Status::Rejected:
+                exit('Unfavorable');
+
+        end;
+    end;
 }

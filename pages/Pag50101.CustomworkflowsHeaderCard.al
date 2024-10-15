@@ -28,6 +28,7 @@ page 50101 "Custom workflows Header Card"
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.';
+                    StyleExpr = Stylish;
                 }
             }
         }
@@ -153,10 +154,13 @@ page 50101 "Custom workflows Header Card"
         OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         HasApprovalEntries := ApprovalsMgmt.HasApprovalEntries(Rec.RecordId);
+        stylish := Segmentationcode.changeColor(Rec)
     end;
 
     var
         OpenApprovalEntriesExistCurrUser, OpenApprovalEntriesExist, CanCancelApprovalForRecord
         , HasApprovalEntries : Boolean;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        stylish: Text;
+        Segmentationcode: Codeunit "Segmentation code";
 }

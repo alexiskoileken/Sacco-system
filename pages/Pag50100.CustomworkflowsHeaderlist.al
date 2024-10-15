@@ -27,10 +27,20 @@ page 50100 "Custom workflows Header list"
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                    StyleExpr = Stylish;
+
                 }
             }
 
         }
-
     }
+    trigger OnAfterGetRecord()
+    var
+        Segmentationcode: Codeunit "Segmentation code";
+    begin
+        Stylish := Segmentationcode.changeColor(Rec)
+    end;
+
+    var
+        Stylish: Text;
 }
