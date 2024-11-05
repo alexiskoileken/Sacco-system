@@ -26,6 +26,7 @@ report 50100 "Purchase Order list"
             column(companyCity; CompInfo.City) { }
             column(CompanyPicture; CompInfo.Picture) { }
             column(ReportHeading; ReportHeading) { }
+
         }
     }
     requestpage
@@ -45,7 +46,15 @@ report 50100 "Purchase Order list"
             {
             }
         }
+        trigger on()
+        var
+            myInt: Integer;
+        begin
+            
+        end;
     }
+    
+
     trigger OnPreReport()
     var
         myInt: Integer;
@@ -53,6 +62,7 @@ report 50100 "Purchase Order list"
         CompInfo.Get();
         CompInfo.CalcFields(Picture);
     end;
+    
 
     var
         CompInfo: Record "Company Information";
